@@ -1,0 +1,13 @@
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username TEXT NOT NULL,
+  password TEXT NOT NULL
+);
+
+CREATE TABLE tasks (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  isComplete BOOLEAN DEFAULT FALSE,
+  userId INTEGER REFERENCES users(id) ON DELETE CASCADE
+);

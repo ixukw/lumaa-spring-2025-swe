@@ -1,0 +1,8 @@
+{
+  "name": "lumma-spring-2025-swe",
+  "scripts": {
+    "start": "(npm run frontend) && (npm run backend)",
+    "frontend": "cd frontend && npm run start",
+    "backend": "cd backend && nppm run start"
+  }
+}
