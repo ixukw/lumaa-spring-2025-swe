@@ -1,0 +1,26 @@
+.task-component {
+  text-align: left;
+  margin: 50px;
+}
+.task-component .task-item {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  text-align: left;
+  width: 50%;
+}
+
+.task-component .task-item > div {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  width: 40%;
+}
+.task-component .task-create-container {
+  width: 50%;
+
+}
+.task-component form {
+  display: flex;
+  flex-direction: column;
+}

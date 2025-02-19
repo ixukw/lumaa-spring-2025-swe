@@ -13,7 +13,11 @@ export default function NavigationComponent() {
     <div className="navigation-component">
       {authContext.user ? 
       <div>
-        <button onClick={() => {}}>Logout</button>
+        <button onClick={() => {
+          setToggleLogin(false);
+          authContext.setUser('');
+          localStorage.setItem('jwt','');
+        }}>Logout</button>
       </div>
       :
       <div>
@@ -23,7 +27,9 @@ export default function NavigationComponent() {
       
       {toggleLogin && !authContext.user && 
       <div className="auth-component-container">
-        <button className="login-dismiss-button" onClick={() => setToggleLogin(false)}>Close Login Window</button>
+        <button className="login-dismiss-button" onClick={() => {
+          setToggleLogin(false);
+        }}>Close Login Window</button>
         <AuthComponent />
       </div>}
     </div>

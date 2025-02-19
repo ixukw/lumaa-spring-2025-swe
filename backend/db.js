@@ -12,6 +12,12 @@ const pool = new Pool({
 
 pool.connect();
 
+/**
+ * JWT Token Authentication
+ * @param {Object} req request
+ * @param {Object} res response
+ * @param {Function} callback callback function if auth successful
+ */
 exports.authToken = (req, res, callback) => {
   const authHeader = req.headers['authorization']
   const token = authHeader;
@@ -30,9 +36,13 @@ exports.authToken = (req, res, callback) => {
   }
 }
 
+/**
+ * Endpoint for user register
+ * @param {Object} req request
+ * @param {Object} res response
+ */
 exports.registerUser = async (req, res) => {
   const {username, password} = req.body;
-
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const {rows} = await pool.query('insert into users (username, password) values ($1,$2) returning *', [username, hashedPassword]);
@@ -42,11 +52,15 @@ exports.registerUser = async (req, res) => {
   }
 }
 
+/**
+ * Endpoint for user login
+ * @param {Object} req request
+ * @param {Object} res response
+ */
 exports.loginUser = async (req, res) => {
   const {username, password} = req.body;
   try {
     const {rows} = await pool.query('select * from users where username = $1', [username]);
-    console.log(rows);
     if (rows) {
       const passwordsMatch = await bcrypt.compare(password, rows[0].password);
       if (passwordsMatch) {
@@ -73,10 +87,9 @@ exports.getTasks = async (req, res) => {
 }
 
 exports.createTask = async (req, res) => {
-  const {title, description, isComplete} = req.body;
-  console.log(req.body, title, description, isComplete);
+  const {title, description, iscomplete} = req.body;
   try {
-    const {rows} = await pool.query('insert into tasks (title, description, isComplete) values ($1, $2, $3)', [title, description, isComplete]);
+    const {rows} = await pool.query('insert into tasks (title, description, iscomplete) values ($1, $2, $3)', [title, description, iscomplete]);
     res.status(201).send('successfully created task');
   } catch (error) {
     console.error('\nError in createTask:',error.stack);
@@ -84,9 +97,10 @@ exports.createTask = async (req, res) => {
 }
 
 exports.updateTask = async (req, res) => {
-  const {title, description, isComplete, id} = req.body;
+  const {id} = req.params;
+  const {title, description, iscomplete} = req.body;
   try {
-    const {rows} = await pool.query('update tasks set title = $1, description = $2, isComplete = $3 where id = $4', [title, description, isComplete, id]);
+    const {rows} = await pool.query('update tasks set title = $1, description = $2, iscomplete = $3 where id = $4', [title, description, iscomplete, id]);
     res.status(200).send('successfully updated task');
   } catch (error) {
     console.error('\nError in updateTask:',error.stack);
@@ -94,7 +108,7 @@ exports.updateTask = async (req, res) => {
 }
 
 exports.deleteTask = async (req, res) => {
-  const {id} = parseInt(req.params.id);
+  const { id } = req.params;
   try {
     const {rows} = await pool.query('delete from tasks where id = $1', [id]);
     res.status(200).send('successfully deleted task');
