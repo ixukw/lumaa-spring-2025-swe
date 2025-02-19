@@ -4,7 +4,7 @@ Submission Name: Inan Xu, inxu@ucsd.edu
 
 ## Instructions
 
-1. Setup the database by importing the schema in db.sql. One way to do this is to start `psql -d postgres -U user`, where user is your admin user, and run `\i db.sql`.
+1. Setup the database by importing the schema in db.sql. One way to do this is to start `psql -d postgres -U user`, where user is your admin user, and run `\i db.sql`. This should create a database called `lumaa` with two tables `users` and `tasks`.
 
 Provide the following environment variables:
 
@@ -14,13 +14,17 @@ Provide the following environment variables:
 
 `DATABASE_PW=`admin password to connect to database
 
-2. Run the backend via `cd backend && npm run start`.
-3. Run the frontend via `cd frontend && npm run start`.
+2. Navigate to the root directory of the project. Run the frontend and backend via `npm run start`.
+
+Alternatively, run the backend from the root directory via `cd backend && npm run start`. Then, run the frontend from the root directory via `cd frontend && npm run start`.
 
 The backend is expected to run on localhost:3001. The frontend is expected to run on localhost:3000.
 
-Salary Expectation: roughly $30/hr base salary.
+Demo link: https://www.youtube.com/watch?v=7UgiJrviDcE.
 
+Note: usernames in the database must be unique.
+
+Salary Expectation: roughly $30/hr base salary.
 
 **Deadline**: Sunday, Feb 23th 11:59 pm PST
 

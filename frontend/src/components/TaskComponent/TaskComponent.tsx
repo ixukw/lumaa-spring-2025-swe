@@ -32,7 +32,6 @@ export default function TaskComponent() {
         return;
       }
       const data = await result.json();
-      console.log(data);
       setTasks(data);
     } catch (error) {
       console.error('\nError in getTasks in TaskComponent');

@@ -90,7 +90,7 @@ export default function LoginComponent() {
         <h1>Login</h1>
         <form method="post" onSubmit={handleLoginSubmit}>
           <input name="username" type="text" placeholder="username" required></input><br/>
-          <input name="password" type="text" placeholder="password" required></input>
+          <input name="password" type="password" placeholder="password" required></input>
           <button type="submit">Login</button>
         </form>
         {status && <p>{status}</p>}
@@ -101,7 +101,7 @@ export default function LoginComponent() {
         <p>Usernames must be unique</p>
         <form method="post" onSubmit={handleRegisterSubmit}>
           <input name="username" type="text" placeholder="username" required></input><br/>
-          <input name="password" type="text" placeholder="password" required></input>
+          <input name="password" type="password" placeholder="password" required></input>
           <button type="submit">Register</button>
         </form>
         {regStatus && <p>{regStatus}</p>}
