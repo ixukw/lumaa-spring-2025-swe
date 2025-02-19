@@ -12,11 +12,11 @@ Provide the following environment variables at `backend/.env`:
 
 ```
 JWT_SECRET=jwt token secret
-DATABASE_HOST=localhost
-DATABASE_NAME=lumaa
-DATABASE_PORT=5432
-DATABASE_USER=postgres user
-DATABASE_PW=postgres password
+DB_HOST=localhost
+DB_NAME=lumaa
+DB_PORT=5432
+DB_USER=postgres user
+DB_PW=postgres password
 ```
 
 2. Navigate to the root directory of the project. Install dependencies using `cd backend && npm install` and `cd frontend && npm install`.
