@@ -1,14 +1,17 @@
 const {Pool} = require('pg');
+const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+dotenv.config();
+
 // initialize the pool for querying the database
 const pool = new Pool({
-  user: process.env.DATABASE_USER,
-  host: process.env.DATABASE_HOST,
-  database: process.env.DATABASE_NAME,
-  password: process.env.DATABASE_PW,
-  port: process.env.DATABASE_PORT,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PW,
+  port: process.env.DB_PORT,
 });
 pool.connect();
 
