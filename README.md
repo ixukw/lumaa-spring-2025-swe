@@ -1,5 +1,27 @@
 # Full-Stack Coding Challenge
 
+Submission Name: Inan Xu, inxu@ucsd.edu
+
+## Instructions
+
+1. Setup the database by importing the schema in db.sql. One way to do this is to start `psql -d postgres -U user`, where user is your admin user, and run `\i db.sql`.
+
+Provide the following environment variables:
+
+`JWT_SECRET=`jwt token secret for generating tokens
+
+`DATABASE_USER=`admin user to connect to database
+
+`DATABASE_PW=`admin password to connect to database
+
+2. Run the backend via `cd backend && npm run start`.
+3. Run the frontend via `cd frontend && npm run start`.
+
+The backend is expected to run on localhost:3001. The frontend is expected to run on localhost:3000.
+
+Salary Expectation: roughly $30/hr base salary.
+
+
 **Deadline**: Sunday, Feb 23th 11:59 pm PST
 
 ---

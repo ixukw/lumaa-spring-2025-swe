@@ -18,6 +18,9 @@ export default function TaskComponent() {
     'authorization': authContext.user
   }
 
+  /**
+   * Gets all tasks
+   */
   async function getTasks(): Promise<void> {
     try {
       const result = await fetch('http://localhost:3001/tasks/', {
@@ -36,6 +39,10 @@ export default function TaskComponent() {
     }
   }
 
+  /**
+   * Deletes a task
+   * @param id task id to delete
+   */
   async function deleteTask(id: number): Promise<void> {
     try {
       const result = await fetch(`http://localhost:3001/tasks/${id}`, {
@@ -53,6 +60,11 @@ export default function TaskComponent() {
     }
   }
 
+  /**
+   * Updates a task
+   * @param id task id to update
+   * @param e React event
+   */
   async function handleUpdateTaskSubmit(id: number, e: React.SyntheticEvent): Promise<void> {
     e.preventDefault();
 
@@ -88,6 +100,10 @@ export default function TaskComponent() {
     }
   }
 
+  /**
+   * Creates a task
+   * @param e React event
+   */
   async function handleCreateTaskSubmit(e: React.SyntheticEvent): Promise<void> {
     e.preventDefault();
 
@@ -125,7 +141,8 @@ export default function TaskComponent() {
     if (authContext.user) {
       getTasks();
     }
-  }, []);
+  // eslint-disable-next-line
+  }, [authContext]);
 
   return (
     <div className="task-component">
@@ -133,15 +150,13 @@ export default function TaskComponent() {
       <div>
         <h1>Tasks</h1>
         <div>
-          <button onClick={getTasks}>get tasks</button>
           {tasks.length > 0 ? tasks.map(task => {
-            console.log(task.iscomplete)
             return (
               <div className="task-item" key={task.id} id={task.id.toString()}>
                 <div>
                   <h2>{task.title}</h2>
                   <span>{task.description}</span>
-                  <span>Completed: <input type="checkbox" name="iscomplete" checked={task.iscomplete ? task.iscomplete : false}/></span>
+                  <span>Completed: <input type="checkbox" name="iscomplete" checked={task.iscomplete ? task.iscomplete : false} readOnly/></span>
                 </div>
                 <div>
                   <form onSubmit={(e) => {handleUpdateTaskSubmit(task.id, e)}}>
@@ -156,6 +171,7 @@ export default function TaskComponent() {
             )})
           : <p>No tasks found.</p>}
         </div>
+
         <div className="task-create-container">
           Create New Task
           <form method="POST" onSubmit={handleCreateTaskSubmit}>
@@ -165,9 +181,9 @@ export default function TaskComponent() {
             <button type="submit">Create Task</button>
           </form>
         </div>
+
       </div>
       : <p>Please login to view this resource.</p>}
-      
     </div>
   )
 }

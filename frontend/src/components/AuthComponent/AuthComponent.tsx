@@ -14,7 +14,11 @@ export default function LoginComponent() {
     'Accept': 'application/json',
   }
 
-  async function handleLoginSubmit(e: React.SyntheticEvent) {
+  /**
+   * Handles the user login event
+   * @param e React event
+   */
+  async function handleLoginSubmit(e: React.SyntheticEvent): Promise<void> {
     e.preventDefault();
 
     const form = e.target as typeof e.target & {
@@ -35,16 +39,12 @@ export default function LoginComponent() {
         })
       });
 
-      console.log(response);
-
       if (!response.ok) {
         setStatus('Invalid username or password, please try again.');
         return;
       }
 
       const token = await response.json();
-      console.log(token);
-      localStorage.setItem('jwt',token);
       authContext.setUser(token);
       setStatus('');
     } catch (error) {
@@ -52,7 +52,11 @@ export default function LoginComponent() {
     }
   }
 
-  async function handleRegisterSubmit(e: React.SyntheticEvent) {
+  /**
+   * Handles the user register event
+   * @param e React event
+   */
+  async function handleRegisterSubmit(e: React.SyntheticEvent): Promise<void> {
     e.preventDefault();
 
     const form = e.target as typeof e.target & {
@@ -71,8 +75,6 @@ export default function LoginComponent() {
         password: password
       })
     });
-
-    console.log(response);
 
     if (!response.ok) {
       setRegStatus('Unable to create account, please try again.');

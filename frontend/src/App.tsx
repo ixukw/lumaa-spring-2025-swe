@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import './App.css';
-
 import { AuthContext } from './contexts/authContext';
-
 import { TaskComponent, NavigationComponent } from './components';
+
+import './App.css';
 
 function App() {
   const [user, setUser] = useState<string>('');

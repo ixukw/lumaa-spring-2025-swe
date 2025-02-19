@@ -2,6 +2,7 @@ const {Pool} = require('pg');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+// initialize the pool for querying the database
 const pool = new Pool({
   user: process.env.DATABASE_USER,
   host: 'localhost',
@@ -9,7 +10,6 @@ const pool = new Pool({
   password: process.env.DATABASE_PW,
   port: 5432,
 });
-
 pool.connect();
 
 /**
@@ -77,6 +77,11 @@ exports.loginUser = async (req, res) => {
   }
 }
 
+/**
+ * Endpoint for getting all tasks
+ * @param {Object} req request
+ * @param {Object} res response
+ */
 exports.getTasks = async (req, res) => {
   try {
     const {rows} = await pool.query('select * from tasks');
@@ -86,6 +91,11 @@ exports.getTasks = async (req, res) => {
   }
 }
 
+/**
+ * Endpoint for creating a task
+ * @param {Object} req request
+ * @param {Object} res response
+ */
 exports.createTask = async (req, res) => {
   const {title, description, iscomplete} = req.body;
   try {
@@ -96,6 +106,11 @@ exports.createTask = async (req, res) => {
   }
 }
 
+/**
+ * Endpoint for updating a task
+ * @param {Object} req request
+ * @param {Object} res response
+ */
 exports.updateTask = async (req, res) => {
   const {id} = req.params;
   const {title, description, iscomplete} = req.body;
@@ -107,6 +122,11 @@ exports.updateTask = async (req, res) => {
   }
 }
 
+/**
+ * Endpoint for deleting a task
+ * @param {Object} req request
+ * @param {Object} res response
+ */
 exports.deleteTask = async (req, res) => {
   const { id } = req.params;
   try {

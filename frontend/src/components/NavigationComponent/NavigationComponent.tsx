@@ -16,7 +16,6 @@ export default function NavigationComponent() {
         <button onClick={() => {
           setToggleLogin(false);
           authContext.setUser('');
-          localStorage.setItem('jwt','');
         }}>Logout</button>
       </div>
       :
