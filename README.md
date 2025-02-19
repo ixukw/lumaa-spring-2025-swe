@@ -6,7 +6,7 @@ Submission Name: Inan Xu, inxu@ucsd.edu
 
 1. Setup the database by importing the schema in db.sql. One way to do this is to start `psql -d postgres -U user`, where user is your admin user, and run `\i db.sql`. This should create a database called `lumaa` with two tables `users` and `tasks`.
 
-Provide the following environment variables:
+Provide the following environment variables at `backend/.env`:
 
 `JWT_SECRET=`jwt token secret for generating tokens
 
@@ -25,6 +25,8 @@ Demo link: https://www.youtube.com/watch?v=7UgiJrviDcE.
 Note: usernames in the database must be unique.
 
 Salary Expectation: roughly $30/hr base salary.
+
+---
 
 **Deadline**: Sunday, Feb 23th 11:59 pm PST
 
