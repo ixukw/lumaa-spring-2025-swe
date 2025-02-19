@@ -1,9 +1,0 @@
-.navigation-component {
-  display: flex;
-  flex-direction: row-reverse;
-  border-bottom: 1px solid black;
-  padding: 20px;
-}
-.navigation-component .login-toggle {
-  cursor: pointer;
-}

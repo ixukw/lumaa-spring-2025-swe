@@ -1,12 +1,6 @@
-/**
- * Database connection
- */
-
 const {Pool} = require('pg');
-// const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
-
-// dotenv.config();
+const bcrypt = require('bcrypt');
 
 const pool = new Pool({
   user: process.env.DATABASE_USER,
@@ -38,9 +32,10 @@ exports.authToken = (req, res, callback) => {
 
 exports.registerUser = async (req, res) => {
   const {username, password} = req.body;
-  console.log(username, password);
+
   try {
-    const {rows} = await pool.query('insert into users (username, password) values ($1,$2) returning *', [username, password]);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const {rows} = await pool.query('insert into users (username, password) values ($1,$2) returning *', [username, hashedPassword]);
     res.status(201).send('successfully registered user');
   } catch (error) {
     console.error('\nError in registerUser:', error.stack);
@@ -50,10 +45,19 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   const {username, password} = req.body;
   try {
-    const {rows} = await pool.query('select * from users where username = $1 and password = $2', [username, password]);
+    const {rows} = await pool.query('select * from users where username = $1', [username]);
     console.log(rows);
-    const token = jwt.sign({username: username}, process.env.JWT_SECRET, { expiresIn: '24h' })
-    res.status(200).json(token);
+    if (rows) {
+      const passwordsMatch = await bcrypt.compare(password, rows[0].password);
+      if (passwordsMatch) {
+        const token = jwt.sign({username: rows[0].username}, process.env.JWT_SECRET, { expiresIn: '24h' })
+        res.status(200).json(token);
+      } else {
+        res.sendStatus(401);
+      }
+    } else {
+      res.sendStatus(401);
+    }
   } catch (error) {
     console.error('\nError in loginUser:', error.stack);
   }

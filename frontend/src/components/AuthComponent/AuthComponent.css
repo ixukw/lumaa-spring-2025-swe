@@ -1,0 +1,10 @@
+.auth-component {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.auth-component form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

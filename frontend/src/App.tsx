@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 
-import TaskComponent from './TaskComponent/TaskComponent';
-import NavigationComponent from './NavigationComponent/NavigationComponent';
+import { AuthContext } from './contexts/authContext';
+
+import { TaskComponent, NavigationComponent } from './components';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState<string>('');
   return (
     <div className="App">
-      <NavigationComponent />
-      {loggedIn && <TaskComponent />}
-      {!loggedIn && <p>Please login first to view this resource.</p>}
+      <AuthContext.Provider value={{ user, setUser }}>
+        <NavigationComponent />
+        <TaskComponent />
+      </AuthContext.Provider>
     </div>
   );
 }
